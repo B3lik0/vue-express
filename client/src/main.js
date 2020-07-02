@@ -4,6 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import MonthPicker from 'vue-month-picker'
+import MonthPickerInput from 'vue-month-picker'
+
+Vue.use(MonthPicker)
+Vue.use(MonthPickerInput)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

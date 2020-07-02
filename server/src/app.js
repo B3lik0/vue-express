@@ -11,7 +11,7 @@ app.use(cors())
 app.post('/register', (req,res)=>
 {
     res.send({
-        message: `usuario ${req.body.email} fuiste registrado` 
+        message: `usuario ${req.body.email} ${req.body.date.from} ${req.body.date.to} ${req.body.password} fuiste registrado` 
     })
 })
 
