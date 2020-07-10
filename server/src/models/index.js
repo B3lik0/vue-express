@@ -3,7 +3,6 @@ const path = require("path");
 const Sequelize = require("sequelize");
 //var env = process.env.NODE_ENV || "development";
 const config = require("../config/config");
-var basename = path.basename(__filename);
 const db = {};
 
 var sequelizedb1 = new Sequelize(
@@ -20,22 +19,23 @@ fs.readdirSync(__dirname)
     db[model.name] = model;
   });
 
-var sequelizedb2 = new Sequelize(
-  config.db.db2.database,
-  config.db.db2.username,
-  config.db.db2.password,
-  config.db.db2.options
-);
+  // var sequelizedb2 = new Sequelize(
+  //   config.db.db2.database,
+  //   config.db.db2.username,
+  //   config.db.db2.password,
+  //   config.db.db2.options
+  // );
+  
+  // fs.readdirSync(__dirname)
+  //   .filter((file) => file !== "index.js")
+  //   .forEach((file) => {
+  //     const model = require(path.join(__dirname, file))(sequelizedb2, Sequelize);
+  //     db[model.name] = model;
+  //   });
+  
 
-fs.readdirSync(__dirname)
-  .filter((file) => file !== "index.js")
-  .forEach((file) => {
-    const model = require(path.join(__dirname, file))(sequelizedb2, Sequelize);
-    db[model.name] = model;
-  });
-
-db.sequelizedb2 = sequelizedb2;
 db.sequelizedb1 = sequelizedb1;
+//db.sequelizedb2 = sequelizedb2;
 db.Sequelize = Sequelize;
 
 module.exports = db;

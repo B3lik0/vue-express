@@ -1,30 +1,43 @@
 <template>
-  <div>
-    <h1>Registro</h1>
-
-    <div class="card">
-      <input type="email" name="email" v-model="email" placeholder="email" />
-      <br />
-      <input
-        type="password"
-        name="password"
-        v-model="password"
-        placeholder="password"
-      />
-      <br />
-      <div style="text-align: center;">
-        <p>{{ date.month }}</p>
-        <month-picker @change="showDate"></month-picker>
+  <v-layout>
+    <v-flex xs6 offset-xs3>
+      <div class="white elevation-2">
+        <v-toolbar flat dense dark class="cyan">
+          <v-toolbar-tittle>Register</v-toolbar-tittle>
+        </v-toolbar>
+        <v-card>
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                label="Login"
+                name="login"
+                prepend-icon="mdi-account"
+                type="text"
+                v-model="email"
+              ></v-text-field>
+              <v-text-field
+                id="password"
+                label="Password"
+                name="password"
+                prepend-icon="mdi-lock"
+                type="password"
+                v-model="password"
+              ></v-text-field>
+              <div class="error" v-html="error"></div>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn large @click="register">Login</v-btn>
+          </v-card-actions>
+        </v-card>
       </div>
-      <br />
-      <button @click="register">Registrarme</button>
-    </div>
-  </div>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
 import AuthenticationService from "@/services/AuthenticationService";
-import MonthPickerInput from "vue-month-picker";
 
 export default {
   name: "Register",
@@ -32,32 +45,30 @@ export default {
     return {
       email: "",
       password: "",
-      date: {
-        from: null,
-        to: null,
-        month: null,
-        year: null
-      }
+      error: null
     };
   },
   methods: {
     async register() {
-      const response = await AuthenticationService.register({
-        email: this.email,
-        password: this.password,
-        date: this.date
-      });
-      console.log(response.data);
+      try {
+        await AuthenticationService.register({
+          email: this.email,
+          password: this.password
+        });
+      } catch (error) {
+        this.error = error.response.data.error;
+      }
     },
     showDate(date) {
       this.date = date;
     }
-  },
-  components: {
-    MonthPickerInput
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.error {
+  color: red;
+}
+</style>

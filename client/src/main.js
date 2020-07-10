@@ -3,14 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 import MonthPicker from 'vue-month-picker'
-import MonthPickerInput from 'vue-month-picker'
+//  import MonthPickerInput from 'vue-month-picker'
 
 Vue.use(MonthPicker)
-Vue.use(MonthPickerInput)
+//  Vue.use(MonthPickerInput)
 
 Vue.config.productionTip = false
+Vue.use(Vuetify)
 
 /* eslint-disable no-new */
 new Vue({
